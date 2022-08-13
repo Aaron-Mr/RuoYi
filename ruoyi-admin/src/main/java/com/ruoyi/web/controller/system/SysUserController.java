@@ -1,6 +1,8 @@
 package com.ruoyi.web.controller.system;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.ArrayUtils;
@@ -59,6 +61,33 @@ public class SysUserController extends BaseController
         startPage();
         List<SysUser> list = userService.selectUserList(user);
         return getDataTable(list);
+
+        //获取用户列表并结合分页查询
+        /*Map<String,Object> map = new HashMap<>();*/
+        //计算开始页码
+        //int beginNo = (pageNum-1)*pageSize;
+
+        //分装参数
+        /*map.put("beginNo",beginNo);
+        map.put("pageSize",pageSize);
+        map.put("userName",userName);
+        map.put("phonenumber",phonenumber);
+        map.put("status",status);
+        map.put("beginTime",beginTime);
+        map.put("endTime",endTime);*/
+
+        //查询总条数
+        //int totalRows = userService.selectTotalRowsOfUserByCondition(map);
+        //查询user列表
+        /*List<SysUser> list = userService.selectUserOfUserByCondition(map);
+
+        TableDataInfo tableDataInfo = new TableDataInfo();
+        tableDataInfo.setRows(list);
+        tableDataInfo.setTotal(totalRows);
+        tableDataInfo.setCode(200);
+        tableDataInfo.setMsg("查询成功");
+
+        return null;*/
     }
 
     @Log(title = "用户管理", businessType = BusinessType.EXPORT)
@@ -136,6 +165,7 @@ public class SysUserController extends BaseController
         }
         user.setCreateBy(getUsername());
         user.setPassword(SecurityUtils.encryptPassword(user.getPassword()));
+
         return toAjax(userService.insertUser(user));
     }
 

@@ -19,6 +19,10 @@ public class SysDept extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
     /** 部门ID */
     private Long deptId;
 

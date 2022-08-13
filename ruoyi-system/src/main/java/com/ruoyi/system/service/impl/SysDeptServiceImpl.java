@@ -63,6 +63,7 @@ public class SysDeptServiceImpl implements ISysDeptService
         {
             tempList.add(dept.getDeptId());
         }
+
         for (SysDept dept : depts)
         {
             // 如果是顶级节点, 遍历该父节点的所有子节点
@@ -72,10 +73,12 @@ public class SysDeptServiceImpl implements ISysDeptService
                 returnList.add(dept);
             }
         }
+
         if (returnList.isEmpty())
         {
             returnList = depts;
         }
+
         return returnList;
     }
 
@@ -291,9 +294,13 @@ public class SysDeptServiceImpl implements ISysDeptService
     {
         // 得到子节点列表
         List<SysDept> childList = getChildList(list, t);
+        //把子节点列表设置为该父节点的
         t.setChildren(childList);
+
+        //循环该子节点列表
         for (SysDept tChild : childList)
         {
+            //如果子节点列表中的节点，还有字节点的话，那就再次遍历（递归）
             if (hasChild(list, tChild))
             {
                 recursionFn(list, tChild);
@@ -311,6 +318,7 @@ public class SysDeptServiceImpl implements ISysDeptService
         while (it.hasNext())
         {
             SysDept n = (SysDept) it.next();
+            //当前部门有父id 并且 该父id等于外围节点
             if (StringUtils.isNotNull(n.getParentId()) && n.getParentId().longValue() == t.getDeptId().longValue())
             {
                 tlist.add(n);

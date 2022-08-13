@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.SysGoodsMapper">
+    
+    <resultMap type="SysGoods" id="SysGoodsResult">
+        <result property="id"    column="id"    />
+        <result property="goodsName"    column="goods_name"    />
+        <result property="goodsPrice"    column="goods_price"    />
+    </resultMap>
+
+    <sql id="selectSysGoodsVo">
+        select id, goods_name, goods_price from sys_goods
+    </sql>
+
+    <select id="selectSysGoodsList" parameterType="SysGoods" resultMap="SysGoodsResult">
+        <include refid="selectSysGoodsVo"/>
+        <where>  
+            <if test="goodsName != null  and goodsName != ''"> and goods_name like concat('%', #{goodsName}, '%')</if>
+            <if test="goodsPrice != null "> and goods_price = #{goodsPrice}</if>
+        </where>
+    </select>
+    
+    <select id="selectSysGoodsById" parameterType="Long" resultMap="SysGoodsResult">
+        <include refid="selectSysGoodsVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertSysGoods" parameterType="SysGoods" useGeneratedKeys="true" keyProperty="id">
+        insert into sys_goods
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="goodsName != null">goods_name,</if>
+            <if test="goodsPrice != null">goods_price,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="goodsName != null">#{goodsName},</if>
+            <if test="goodsPrice != null">#{goodsPrice},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSysGoods" parameterType="SysGoods">
+        update sys_goods
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="goodsName != null">goods_name = #{goodsName},</if>
+            <if test="goodsPrice != null">goods_price = #{goodsPrice},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteSysGoodsById" parameterType="Long">
+        delete from sys_goods where id = #{id}
+    </delete>
+
+    <delete id="deleteSysGoodsByIds" parameterType="String">
+        delete from sys_goods where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

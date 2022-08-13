@@ -31,7 +31,7 @@ import com.ruoyi.system.service.ISysMenuService;
  * @author ruoyi
  */
 @Service
-public class SysMenuServiceImpl implements ISysMenuService
+class selectMenuTreeByUserIdSysMenuServiceImpl implements ISysMenuService
 {
     public static final String PREMISSION_STRING = "perms[\"{0}\"]";
 

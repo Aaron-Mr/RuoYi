@@ -2,6 +2,7 @@ package com.ruoyi.system.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import javax.validation.Validator;
 import org.slf4j.Logger;
@@ -60,6 +61,26 @@ public class SysUserServiceImpl implements ISysUserService
 
     @Autowired
     protected Validator validator;
+
+    /**
+     * 根据条件分页查询用户列表总条数
+     * @param map 封装起来的条件
+     * @return 用户列表总条数
+     */
+    @Override
+    public int selectTotalRowsOfUserByCondition(Map<String, Object> map) {
+        return userMapper.selectTotalRowsOfUserByCondition(map);
+    }
+
+    /**
+     * 根据条件分页查询用户列表
+     * @param map 封装起来的条件
+     * @return 用户列表
+     */
+    @Override
+    public List<SysUser> selectUserOfUserByCondition(Map<String, Object> map) {
+        return userMapper.selectUserOfUserByCondition(map);
+    }
 
     /**
      * 根据条件分页查询用户列表

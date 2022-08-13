@@ -1,6 +1,8 @@
 package com.ruoyi.system.mapper;
 
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Param;
 import com.ruoyi.common.core.domain.entity.SysUser;
 
@@ -11,6 +13,21 @@ import com.ruoyi.common.core.domain.entity.SysUser;
  */
 public interface SysUserMapper
 {
+
+    /**
+     * 自行编写根据条件分页查询用户列表总条数
+     * @param map 封装起来的条件
+     * @return 符合条数的总条数
+     */
+    public int selectTotalRowsOfUserByCondition(Map<String,Object> map);
+
+    /**
+     * 自行编写根据条件分页查询用户列表
+     * @param map 封装起来的条件
+     * @return 符合条数的用户列表
+     */
+    public List<SysUser> selectUserOfUserByCondition(Map<String,Object> map);
+
     /**
      * 根据条件分页查询用户列表
      * 
