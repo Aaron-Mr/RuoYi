@@ -44,7 +44,7 @@ public class Factory extends BaseEntity
 
     /** 状态 */
     @Excel(name = "状态")
-    private Long status;
+    private String status;
 
     public void setFacId(Long facId) {
         this.facId = facId;
@@ -95,11 +95,11 @@ public class Factory extends BaseEntity
     public String getFacAddress() {
         return facAddress;
     }
-    public void setStatus(Long status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
-    public Long getStatus() {
+    public String getStatus() {
         return status;
     }
 

@@ -24,6 +24,13 @@ public class HisDeptsController extends BaseController {
     @Resource
     private IHisDeptsService hisDeptsService;
 
+    @GetMapping("/hello")
+    public TableDataInfo list1(HisDepts hisDepts){
+        System.out.println(hisDepts);
+        startPage();
+        List<HisDepts> list = hisDeptsService.selectHisDeptsList(hisDepts);
+        return getDataTable(list);
+    }
 
     /**
      * 获取科室列表
